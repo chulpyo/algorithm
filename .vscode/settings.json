@@ -1,3 +1,9 @@
 {
-    "window.zoomLevel": -2
+    "window.zoomLevel": -2,
+    "python.testing.pytestArgs": [
+        "src",
+        "-s"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

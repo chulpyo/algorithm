@@ -1,15 +1,13 @@
-from email.policy import default
-import os
 import click
 
 from functools import wraps
-from typing import Callable, OrderedDict, TypeVar, Type
+from typing import Callable, OrderedDict, TypeVar
 from typing_extensions import ParamSpec
 
 _P = ParamSpec("_P")
 _R = TypeVar("_R")
 
-def test_deco(exception: Type[Exception] = Exception):
+def exception_handler(exception: Exception = Exception):
     def decorator(f: Callable[_P, _R]) -> Callable[_P, _R]:
         """TEST 데코레이터"""
         @wraps(f)
@@ -25,31 +23,3 @@ def test_deco(exception: Type[Exception] = Exception):
         return wrapper
     
     return decorator
-
-
-@click.group()
-# @test_deco(exception=ValueError)
-@click.option('--debug/--no-debug', default=False)
-def cli(debug):
-    click.echo(f'running make-problem -> debug: {debug}')
-    
-
-@cli.command()
-def make_problem() -> None:
-    """문제 템플릿 자동 생성
-
-    Parameters
-    ----------
-    
-    Returns
-    -------
-    : None
-
-    """
-
-    # raise ValueError('fuck')
-    click.echo('--')
-
-
-if __name__ == '__main__':
-    cli()
